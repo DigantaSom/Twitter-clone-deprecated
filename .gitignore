@@ -1,0 +1,7 @@
+# Server
+
+node_modules
+.env
+.DS_Store
+
+zz-helper.txt
