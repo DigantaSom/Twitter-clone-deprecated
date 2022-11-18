@@ -15,7 +15,7 @@ const User = require('../../models/User');
 // @access  Testing only
 router.get('/', async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select('-password');
     return res.status(200).json(users);
   } catch (err) {
     res.status(400).json({
@@ -45,7 +45,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, handle, password } = req.body;
+    const { name, handle, password, profilePicture } = req.body;
+    email = req.body.email.toLowerCase();
 
     try {
       let user = await User.findOne({ email });
@@ -58,10 +59,11 @@ router.post(
 
       user = new User({
         name,
-        email: email.toLowerCase(),
+        email,
         handle,
         handle_lowercase: handle.toLowerCase(),
         password,
+        profilePicture: profilePicture || '',
       });
       user.password = await argon2.hash(password);
 
