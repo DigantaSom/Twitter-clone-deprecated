@@ -1,7 +1,41 @@
-# Server
+# Server --------------
 
 node_modules
 .env
 .DS_Store
+
+# Client --------------
+
+# dependencies
+client/node_modules
+client/.pnp
+client/.pnp.js
+
+# testing
+client/coverage
+
+# next.js
+client/.next/
+client/out/
+
+# production
+client/build
+
+# debug
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/.pnpm-debug.log*
+
+# vercel
+client/.vercel
+
+# typescript
+client/*.tsbuildinfo
+client/next-env.d.ts
+
+# Misc -----------------
+.DS_Store
+*.pem
 
 zz-helper.txt
