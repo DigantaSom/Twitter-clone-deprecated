@@ -26,12 +26,38 @@ router.get('/:tweetId', async (req, res) => {
   }
 });
 
+// @route   GET api/tweets/replies/:tweetId/:replyId
+// @desc    Fetch a particular reply
+// @access  Public
+router.get('/:tweetId/:replyId', async (req, res) => {
+  try {
+    const tweet = await Tweet.findById(req.params.tweetId);
+    if (!tweet) {
+      return res.status(404).json({ msg: 'Cannot retrieve tweet.' });
+    }
+
+    const reply = tweet.replies.find(
+      reply => reply.id.toString() === req.params.replyId
+    );
+    if (!reply) {
+      return res.status(404).json({ msg: 'Cannot retrieve reply.' });
+    }
+
+    res.status(200).json(reply);
+  } catch (error) {
+    console.log(error.message);
+    if (error.kind === 'ObjectId') {
+      res.status(404).json({ msg: 'Cannot retrieve tweet.' });
+    }
+  }
+});
+
 // @route   PUT api/tweets/replies/:tweetId
 // @desc    Reply to a tweet
 // @access  Private
 router.put(
   '/:tweetId',
-  [auth, [check('text', 'Text is required to reply')]],
+  [auth, [check('text', 'Text is required to reply').not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
 
