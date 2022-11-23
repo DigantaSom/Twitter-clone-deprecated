@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import Feed from '../components/Feed';
+import Navigation from '../components/Navigation';
+import Trending from '../components/Trending';
 
 const Home = () => {
   return (
@@ -9,7 +12,15 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div className='text-3xl text-red-500'>heyo!</div>
+      <div>
+        <div className='w-[25%] h-full fixed'>
+          <Navigation />
+        </div>
+        <div className='ml-[25%] w-[75%] flex justify-between'>
+          <Feed />
+          <Trending />
+        </div>
+      </div>
     </div>
   );
 };
