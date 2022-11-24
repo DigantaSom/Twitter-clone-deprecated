@@ -1,12 +1,14 @@
 import Header from './Header';
+import CreateTweet from './CreateTweet';
 
 const Feed = () => {
   return (
-    <div className='border-l-[1px] border-r-[1px] border-b-[1px] border-gray-200 w-[55%] py-2'>
-      <div className='border-b-[1px] border-gray-200 px-4'>
+    <div className='w-full md:min-w-[600px] py-2'>
+      <div className='border-b-[1px] border-x-[1px] border-gray-200 px-4'>
         <Header />
+        <CreateTweet />
       </div>
-      <div className='px-4'>list of posts</div>
+      <div className='border-x-[1px] border-gray-200 px-4'></div>
     </div>
   );
 };

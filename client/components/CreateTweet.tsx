@@ -12,7 +12,7 @@ import { CgPin } from 'react-icons/cg';
 const CreateTweet = () => {
   return (
     <>
-      <div className='flex items-start justify-between py-3'>
+      <div className='hidden ph:flex items-start justify-between py-3'>
         {/* left */}
         <div className='pr-3'>
           <div className='w-12 h-12'>
@@ -42,13 +42,13 @@ const CreateTweet = () => {
               <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
                 <AiOutlineFileGif />
               </div>
-              <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
+              <div className='hidden sm:block p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
                 <BiPoll />
               </div>
               <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
                 <GrEmoji />
               </div>
-              <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
+              <div className='hidden sm:block p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
                 <AiOutlineSchedule />
               </div>
               <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
