@@ -11,6 +11,8 @@ import { FaRegUser } from 'react-icons/fa';
 import { CgMoreO } from 'react-icons/cg';
 import { FiMoreHorizontal, FiFeather } from 'react-icons/fi';
 
+import constants from '../constants';
+
 const Navigation = () => {
   return (
     <div className='mr-[15%]'>
@@ -96,7 +98,7 @@ const Navigation = () => {
         <div className='absolute bottom-0 w-full hover:bg-gray-200 hover:cursor-pointer rounded-full flex items-center px-3 py-2'>
           <div className='w-11 h-11'>
             <Image
-              src='https://www.prognos.com/sites/default/files/styles/profile_image/public/2020-06/profile-pic-placeholder.png?itok=x2Ckkfjo'
+              src={constants.placeholder_profilePicture}
               alt='User'
               width={44}
               height={44}

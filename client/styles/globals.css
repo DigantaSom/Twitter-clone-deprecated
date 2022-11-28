@@ -19,6 +19,21 @@ a {
   box-sizing: border-box;
 }
 
+.custom-image-container {
+  width: 100%;
+}
+
+.custom-image-container > div {
+  position: unset !important;
+}
+
+.custom-image-container .custom-image {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

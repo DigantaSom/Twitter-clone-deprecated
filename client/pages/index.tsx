@@ -14,7 +14,7 @@ const Home = () => {
       </Head>
 
       <div className='max-w-[664px] md2:max-w-[90vw] xl:max-w-7xl m-auto flex h-screen'>
-        <div className='hidden ph:block w-16 xl:w-[20%]'>
+        <div className='hidden ph:block w-16 xl:w-[20%] border-r-[1px] border-gray-200'>
           <Navigation />
         </div>
         <div className='flex-1 xl:w-[75%] flex overflow-y-scroll'>
