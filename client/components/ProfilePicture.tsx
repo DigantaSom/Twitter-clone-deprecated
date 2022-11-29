@@ -8,7 +8,7 @@ const ProfilePicture = () => {
 
   return (
     <div onClick={() => router.push('/profile')}>
-      <div className='relative w-12 h-12 hover:cursor-pointer'>
+      <div className='relative w-10 h-10 ph_sm:w-12 ph_sm:h-12 hover:cursor-pointer'>
         <Image
           src={constants.placeholder_profilePicture}
           alt='User'

@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        ph_sm: '401px',
         ph: '501px',
         md2: '1051px',
       },
@@ -16,6 +17,10 @@ module.exports = {
           light: '#DEEFFA',
           DEFAULT: '#1D9BF0',
           dark: '#098ae0',
+        },
+        like: {
+          light: '#FCD7E8',
+          DEFAULT: '#F91880',
         },
       },
     },

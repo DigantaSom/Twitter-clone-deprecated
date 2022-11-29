@@ -1,16 +1,13 @@
 import Link from 'next/link';
-import Image from 'next/image';
-
 import { HiOutlineSparkles } from 'react-icons/hi';
 
-import constants from '../constants';
 import ProfilePicture from './ProfilePicture';
 
 const Header = () => {
   return (
     <div
       className='flex items-center justify-between sticky top-0 z-50 bg-white opacity-90 
-      h-12 px-4'
+      h-12 px-2 ph_sm:px-4'
     >
       <Link href='/' className='flex items-center'>
         <div className='block ph:hidden mr-3'>
@@ -20,7 +17,7 @@ const Header = () => {
       </Link>
 
       <div
-        className='w-10 h-10 rounded-full hover:bg-gray-200 hover:cursor-pointer 
+        className='w-8 h-8 ph_sm:w-10 ph_sm:h-10 rounded-full hover:bg-gray-200 hover:cursor-pointer 
         flex items-center justify-center'
       >
         <HiOutlineSparkles className='text-xl' />
