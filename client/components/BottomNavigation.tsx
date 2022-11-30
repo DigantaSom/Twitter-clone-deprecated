@@ -7,7 +7,7 @@ import { TbMessages } from 'react-icons/tb';
 
 const BottomNavigation = () => {
   return (
-    <div className='ph:hidden absolute bottom-0 px-4 py-3 bg-white z-50 border-t-2 border-gray-200 w-full'>
+    <div className='ph:hidden absolute bottom-0 z-30 px-4 py-3 bg-white border-t-2 border-gray-200 w-full'>
       <div className='flex items-center justify-around'>
         <Link href='/' className='rounded-full hover:bg-gray-200'>
           <BiHomeCircle className='text-3xl' />

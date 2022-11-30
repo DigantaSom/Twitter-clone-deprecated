@@ -4,7 +4,7 @@ import PostList from './PostList';
 const Feed = () => {
   return (
     <>
-      <CreateTweet />
+      <CreateTweet from='Feed' />
       <PostList />
     </>
   );

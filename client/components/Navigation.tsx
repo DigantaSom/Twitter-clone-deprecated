@@ -9,9 +9,10 @@ import { TbMessages } from 'react-icons/tb';
 import { RiFileListLine } from 'react-icons/ri';
 import { FaRegUser } from 'react-icons/fa';
 import { CgMoreO } from 'react-icons/cg';
-import { FiMoreHorizontal, FiFeather } from 'react-icons/fi';
+import { FiMoreHorizontal } from 'react-icons/fi';
 
 import constants from '../constants';
+import TweetComposeButton from './TweetComposeButton';
 
 const Navigation = () => {
   return (
@@ -84,15 +85,7 @@ const Navigation = () => {
             <span className='hidden xl:block text-xl'>More</span>
           </Link>
 
-          <button
-            className='text-white bg-twitter hover:bg-twitter-dark p-2 xl:p-3 
-            w-10 h-10 xl:w-full rounded-full text-base xl:text-lg font-semibold flex items-center     justify-center'
-          >
-            <span className='rounded-full xl:hidden'>
-              <FiFeather />
-            </span>
-            <span className='hidden xl:block'>Tweet</span>
-          </button>
+          <TweetComposeButton from='Navigation' />
         </div>
 
         <div className='absolute bottom-0 w-full hover:bg-gray-200 hover:cursor-pointer rounded-full flex items-center px-3 py-2'>

@@ -6,7 +6,7 @@ import ProfilePicture from './ProfilePicture';
 const Header = () => {
   return (
     <div
-      className='flex items-center justify-between sticky top-0 z-50 bg-white opacity-90 
+      className='flex items-center justify-between sticky top-0 z-30 bg-white opacity-90 
       h-12 px-2 ph_sm:px-4'
     >
       <Link href='/' className='flex items-center'>

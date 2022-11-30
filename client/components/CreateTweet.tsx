@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { FC } from 'react';
 
 import {
   AiOutlinePicture,
@@ -10,45 +10,72 @@ import { GrEmoji } from 'react-icons/gr';
 import { CgPin } from 'react-icons/cg';
 
 import ProfilePicture from './ProfilePicture';
+import TweetSubmitButton from './TweetSubmitButton';
 
-const CreateTweet = () => {
+interface CreateTweetProps {
+  from: 'Feed' | 'ComposeTweet';
+}
+
+const CreateTweet: FC<CreateTweetProps> = ({ from }) => {
+  let container_dynamicStyles = '';
+  let textarea_dynamicStyles = '';
+  let icon_dynamicStyles = '';
+
+  if (from === 'Feed') {
+    container_dynamicStyles =
+      'hidden ph:flex py-3 px-4 border-b-[1px] border-gray-200';
+    textarea_dynamicStyles = 'focus:border-b-[1px] focus:border-gray-200';
+    icon_dynamicStyles = 'hidden sm:block';
+  } else if (from === 'ComposeTweet') {
+    container_dynamicStyles = 'flex';
+    textarea_dynamicStyles = 'border-b-[1px] border-gray-200';
+    icon_dynamicStyles = 'block';
+  }
+
   return (
-    <div className='hidden ph:flex items-start justify-between py-3 px-4 border-b-[1px] border-gray-200'>
+    <div
+      className={`${container_dynamicStyles} items-start justify-between h-full`}
+    >
       {/* left */}
       <ProfilePicture />
 
       {/* right */}
-      <div className='flex flex-col w-full ml-3'>
+      <div className='flex flex-col w-full h-full ml-3'>
         <textarea
           placeholder="What's happening?"
           rows={2}
-          className='w-full placeholder-gray-600 placeholder:text-xl py-2 outline-none focus:border-b-[1px] focus:border-gray-200'
+          className={`w-full flex-1 placeholder-gray-600 placeholder:text-xl py-2 outline-none ${textarea_dynamicStyles}`}
         ></textarea>
 
-        <div className='flex items-center justify-between mt-2'>
-          <div className='flex items-center space-x-3 text-twitter text-xl'>
-            <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
+        <div className='flex items-center justify-between mt-4 ph:mt-2'>
+          <div className='flex items-center ph_xs:space-x-1 text-twitter text-xl'>
+            <div className='p-1 mr-[2px] ph_xs:p-2 ph_xs:mr-0 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
               <AiOutlinePicture />
             </div>
             <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
               <AiOutlineFileGif />
             </div>
-            <div className='hidden sm:block p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
+            <div
+              className={`${icon_dynamicStyles} p-1 mr-[2px] ph_xs:p-2 ph_xs:mr-0 rounded-full hover:cursor-pointer hover:bg-twitter-light`}
+            >
               <BiPoll />
             </div>
-            <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
+            <div className='p-1 mr-[2px] ph_xs:p-2 ph_xs:mr-0 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
               <GrEmoji />
             </div>
-            <div className='hidden sm:block p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
+            <div
+              className={`${icon_dynamicStyles} p-1 mr-[2px] ph_xs:p-2 ph_xs:mr-0 rounded-full hover:cursor-pointer hover:bg-twitter-light`}
+            >
               <AiOutlineSchedule />
             </div>
-            <div className='p-2 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
+            <div className='p-1 mr-[2px] ph_xs:p-2 ph_xs:mr-0 rounded-full hover:cursor-pointer hover:bg-twitter-light'>
               <CgPin />
             </div>
           </div>
-          <button className='text-white bg-twitter hover:bg-twitter-dark rounded-full px-4 py-2 font-medium'>
-            Tweet
-          </button>
+
+          <div className='hidden ph:block'>
+            <TweetSubmitButton />
+          </div>
         </div>
       </div>
     </div>
