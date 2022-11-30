@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import Navigation from '../components/Navigation';
+
+import Layout from '../components/Layout';
 import Feed from '../components/Feed';
-import Trending from '../components/Trending';
-import BottomNavigation from '../components/BottomNavigation';
+import Header from '../components/Header';
 
 const Home = () => {
   return (
@@ -13,17 +13,10 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div className='max-w-[664px] md2:max-w-[90vw] xl:max-w-7xl m-auto flex h-screen'>
-        <div className='hidden ph:block w-16 xl:w-[20%] border-r-[1px] border-gray-200'>
-          <Navigation />
-        </div>
-        <div className='flex-1 xl:w-[75%] flex overflow-y-scroll'>
-          <Feed />
-          <Trending />
-        </div>
-      </div>
-
-      <BottomNavigation />
+      <Layout>
+        <Header />
+        <Feed />
+      </Layout>
     </div>
   );
 };
