@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import {
   AiOutlinePicture,
@@ -12,11 +12,21 @@ import { CgPin } from 'react-icons/cg';
 import ProfilePicture from './ProfilePicture';
 import TweetSubmitButton from './TweetSubmitButton';
 
+import { useAppDispatch } from '../hooks';
+import { handleSubmitDisabled } from '../redux/UI/ui.slice';
+
 interface CreateTweetProps {
   from: 'Feed' | 'ComposeTweet';
 }
 
 const CreateTweet: FC<CreateTweetProps> = ({ from }) => {
+  const [text, setText] = useState('');
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(handleSubmitDisabled(text === ''));
+  }, [text]);
+
   let container_dynamicStyles = '';
   let textarea_dynamicStyles = '';
   let icon_dynamicStyles = '';
@@ -44,6 +54,7 @@ const CreateTweet: FC<CreateTweetProps> = ({ from }) => {
         <textarea
           placeholder="What's happening?"
           rows={2}
+          onChange={e => setText(e.target.value)}
           className={`w-full flex-1 placeholder-gray-600 placeholder:text-xl py-2 outline-none ${textarea_dynamicStyles}`}
         ></textarea>
 
@@ -74,7 +85,7 @@ const CreateTweet: FC<CreateTweetProps> = ({ from }) => {
           </div>
 
           <div className='hidden ph:block'>
-            <TweetSubmitButton />
+            <TweetSubmitButton isDisabled={text === ''} />
           </div>
         </div>
       </div>

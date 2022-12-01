@@ -4,15 +4,17 @@ import { IoCloseSharp } from 'react-icons/io5';
 import CreateTweet from './CreateTweet';
 import TweetSubmitButton from './TweetSubmitButton';
 
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { toggleComposeTweet } from '../redux/UI/ui.slice';
 
 const ComposeTweet = () => {
+  const isSubmitDisabled = useAppSelector(state => state.ui.isSubmitDisabled);
   const dispatch = useAppDispatch();
 
   return (
     <div className='w-screen h-screen ph:w-[90vw] sm:w-[600px] ph:h-[314px] bg-white p-4 ph:rounded-2xl'>
       <div className='h-[40vh] ph:h-full flex flex-col'>
+        {/* header */}
         <div className='flex items-center justify-between mb-4'>
           <div className='w-8 h-8 p-1 -ml-1 flex items-center justify-center rounded-full hover:bg-gray-200 hover:cursor-pointer'>
             <IoCloseSharp
@@ -25,10 +27,11 @@ const ComposeTweet = () => {
             />
           </div>
           <div className='ph:hidden'>
-            <TweetSubmitButton />
+            <TweetSubmitButton isDisabled={isSubmitDisabled} />
           </div>
         </div>
 
+        {/* body */}
         <div className='flex-1'>
           <CreateTweet from='ComposeTweet' />
         </div>

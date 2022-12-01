@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-import { RootState } from '../store';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface UiState {
   isComposeTweetShown: boolean;
+  isSubmitDisabled: boolean;
 }
 
 const initialState: UiState = {
   isComposeTweetShown: false,
+  isSubmitDisabled: true,
 };
 
 const uiSlice = createSlice({
@@ -17,12 +18,12 @@ const uiSlice = createSlice({
     toggleComposeTweet: state => {
       state.isComposeTweetShown = !state.isComposeTweetShown;
     },
+    handleSubmitDisabled: (state, action: PayloadAction<boolean>) => {
+      state.isSubmitDisabled = action.payload;
+    },
   },
 });
 
-export const { toggleComposeTweet } = uiSlice.actions;
-
-export const selectIsComposeTweetShown = (state: RootState) =>
-  state.ui.isComposeTweetShown;
+export const { toggleComposeTweet, handleSubmitDisabled } = uiSlice.actions;
 
 export default uiSlice.reducer;
