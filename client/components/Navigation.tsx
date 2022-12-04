@@ -11,8 +11,9 @@ import { FaRegUser } from 'react-icons/fa';
 import { CgMoreO } from 'react-icons/cg';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
-import constants from '../constants';
 import TweetComposeButton from './TweetComposeButton';
+
+import constants from '../constants';
 
 const Navigation = () => {
   return (

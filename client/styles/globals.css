@@ -17,6 +17,13 @@ a {
 
 * {
   box-sizing: border-box;
+  overflow: -moz-scrollbars-none; /* Hide Scrollbar (Firefox) */
+  -ms-overflow-style: none; /* Hide Scrollbar (IE 10+) */
+}
+
+/* Hide Scrollbar (Chrome, Safari, newer versions of Opera) */
+*::-webkit-scrollbar {
+  width: 0 !important;
 }
 
 .custom-image-container {

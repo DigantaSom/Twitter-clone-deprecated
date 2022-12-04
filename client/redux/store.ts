@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import uiReducer from './UI/ui.slice';
+import trendingSlice from './trending/trending.slice';
 
 const store = configureStore({
   reducer: {
     ui: uiReducer,
+    trending: trendingSlice,
   },
 });
 

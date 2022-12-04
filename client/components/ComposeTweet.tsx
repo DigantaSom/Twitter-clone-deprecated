@@ -1,5 +1,4 @@
-import { IoArrowBack } from 'react-icons/io5';
-import { IoCloseSharp } from 'react-icons/io5';
+import { IoArrowBack, IoCloseSharp } from 'react-icons/io5';
 
 import CreateTweet from './CreateTweet';
 import TweetSubmitButton from './TweetSubmitButton';
