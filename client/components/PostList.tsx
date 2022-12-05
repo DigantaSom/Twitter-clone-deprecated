@@ -1,18 +1,33 @@
+import { useEffect } from 'react';
+
 import PostItem from './PostItem';
 
-import DemoPost1 from '../images/demo-post-1.jpeg';
-import DemoPost2 from '../images/demo-post-2.jpg';
-import DemoPost3 from '../images/demo-post-3.jpeg';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { fetchTweetSuccess } from '../redux/tweet/tweet.slice';
 
 const PostList = () => {
+  const dispatch = useAppDispatch();
+  const { tweets, isLoading, error } = useAppSelector(state => state.tweet);
+
+  useEffect(() => {
+    dispatch(fetchTweetSuccess());
+  }, []);
+
+  if (isLoading) {
+    return 'Loading...';
+  }
+
   return (
-    <div>
-      <PostItem imageSrc={DemoPost1} />
-      <PostItem imageSrc={DemoPost2} />
-      <PostItem imageSrc={DemoPost3} />
-      <br />
-      <br />
-    </div>
+    !isLoading &&
+    !error && (
+      <div>
+        {tweets.map(tweet => (
+          <PostItem key={tweet.id} tweet={tweet} />
+        ))}
+        <br />
+        <br />
+      </div>
+    )
   );
 };
 

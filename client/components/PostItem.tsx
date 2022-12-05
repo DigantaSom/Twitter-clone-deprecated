@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 import { BsDot } from 'react-icons/bs';
 import { FiMoreHorizontal } from 'react-icons/fi';
@@ -8,11 +8,22 @@ import { FiMoreHorizontal } from 'react-icons/fi';
 import ProfilePicture from './ProfilePicture';
 import TweetActions from './TweetActions';
 
+import { Tweet } from '../types';
+
 interface PostItemProps {
-  imageSrc: StaticImageData;
+  tweet: Tweet;
 }
 
-const PostItem: FC<PostItemProps> = ({ imageSrc }) => {
+const PostItem: FC<PostItemProps> = ({
+  tweet: {
+    fullName,
+    twitterHandle,
+    profilePicture,
+    id: tweetId,
+    caption,
+    media,
+  },
+}) => {
   const router = useRouter();
 
   const navigateToPost = () => {
@@ -25,7 +36,7 @@ const PostItem: FC<PostItemProps> = ({ imageSrc }) => {
       border-b-[1px] border-gray-200'
     >
       <div className='flex items-start'>
-        <ProfilePicture />
+        <ProfilePicture uri={profilePicture} />
 
         <div className='ml-2 ph_sm:ml-3 flex-1'>
           <div className='flex items-start ph_sm:items-center justify-between'>
@@ -34,9 +45,9 @@ const PostItem: FC<PostItemProps> = ({ imageSrc }) => {
               onClick={navigateToPost}
             >
               <div className='flex flex-col ph_sm:flex-row ph_sm:items-center ph_sm:space-x-2'>
-                <h3 className='font-bold'>Jenna Ortega</h3>
+                <h3 className='font-bold'>{fullName}</h3>
                 <div className='flex items-center space-x-1'>
-                  <span className='text-gray-500'>@jennaortega</span>
+                  <span className='text-gray-500'>@{twitterHandle}</span>
                   <BsDot />
                   <span className='text-gray-500'>16h</span>
                 </div>
@@ -49,13 +60,12 @@ const PostItem: FC<PostItemProps> = ({ imageSrc }) => {
           </div>
 
           <p className='mt-1 ph_sm:mt-[2px]' onClick={navigateToPost}>
-            Eat your turkey and maybe watch the show. Please don't let this
-            outfit be for nothing.
+            {caption}
           </p>
 
           <div className='custom-image-container relative pt-3 pb-2'>
             <Image
-              src={imageSrc}
+              src={media[0]}
               fill
               sizes='100%'
               priority={false}

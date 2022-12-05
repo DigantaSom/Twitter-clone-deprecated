@@ -3,6 +3,8 @@ import { HiOutlineSparkles } from 'react-icons/hi';
 
 import ProfilePicture from './ProfilePicture';
 
+import constants from '../constants';
+
 const Header = () => {
   return (
     <div
@@ -11,7 +13,7 @@ const Header = () => {
     >
       <Link href='/' className='flex items-center'>
         <div className='block ph:hidden mr-3'>
-          <ProfilePicture />
+          <ProfilePicture uri={constants.placeholder_profilePicture} />
         </div>
         <span className='font-bold text-lg ph:text-xl -mt-1'>Home</span>
       </Link>

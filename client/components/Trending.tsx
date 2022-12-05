@@ -18,6 +18,8 @@ import {
   showWhoToFollow,
 } from '../redux/trending/trending.slice';
 
+import constants from '../constants';
+
 const Trending = () => {
   const dispatch = useAppDispatch();
   const whatsHappening = useAppSelector(state => state.trending.whatsHappening);
@@ -25,13 +27,14 @@ const Trending = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedTrendId, setSelectedTrendId] = useState(whatsHappening[0].id);
+  const [selectedTrendId, setSelectedTrendId] = useState<string | undefined>();
 
   const router = useRouter();
 
   useEffect(() => {
     dispatch(showWhatsHappening());
     dispatch(showWhoToFollow());
+    setSelectedTrendId(whatsHappening[0]?.id);
   }, []);
 
   // TODO: we'll do more with this function when we'll implement the search functionality
@@ -145,7 +148,7 @@ const Trending = () => {
                 onClick={() => handleGoToProfile(item.handle)}
                 className='flex items-start'
               >
-                <ProfilePicture />
+                <ProfilePicture uri={constants.placeholder_profilePicture} />
                 <div className='ml-4 flex flex-col'>
                   <span className='font-bold text-[15px] text-gray-700 hover:underline'>
                     {item.fullName}

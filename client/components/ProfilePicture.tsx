@@ -1,16 +1,19 @@
+import { FC } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import constants from '../constants';
+interface ProfilePictureProps {
+  uri: string;
+}
 
-const ProfilePicture = () => {
+const ProfilePicture: FC<ProfilePictureProps> = ({ uri }) => {
   const router = useRouter();
 
   return (
     <div onClick={() => router.push('/profile')}>
       <div className='relative w-10 h-10 ph_sm:w-12 ph_sm:h-12 hover:cursor-pointer'>
         <Image
-          src={constants.placeholder_profilePicture}
+          src={uri}
           alt='User'
           fill
           sizes='100%'

@@ -15,6 +15,8 @@ import TweetSubmitButton from './TweetSubmitButton';
 import { useAppDispatch } from '../hooks';
 import { handleSubmitDisabled } from '../redux/UI/ui.slice';
 
+import constants from '../constants';
+
 interface CreateTweetProps {
   from: 'Feed' | 'ComposeTweet';
 }
@@ -47,7 +49,7 @@ const CreateTweet: FC<CreateTweetProps> = ({ from }) => {
       className={`${container_dynamicStyles} items-start justify-between h-full`}
     >
       {/* left */}
-      <ProfilePicture />
+      <ProfilePicture uri={constants.placeholder_profilePicture} />
 
       {/* right */}
       <div className='flex flex-col w-full h-full ml-3'>
