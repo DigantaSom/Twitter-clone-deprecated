@@ -27,7 +27,11 @@ const PostItem: FC<PostItemProps> = ({
   const router = useRouter();
 
   const navigateToPost = () => {
-    // router.push('/[handle]/status/[tweet_id]');
+    router.push(`/${twitterHandle}/status/${tweetId}`);
+  };
+
+  const navigateToPostFullScreen = () => {
+    router.push(`/${twitterHandle}/status/${tweetId}/photo`);
   };
 
   return (
@@ -63,7 +67,10 @@ const PostItem: FC<PostItemProps> = ({
             {caption}
           </p>
 
-          <div className='custom-image-container relative pt-3 pb-2'>
+          <div
+            onClick={navigateToPostFullScreen}
+            className='custom-image-container relative pt-3 pb-2'
+          >
             <Image
               src={media[0]}
               fill
