@@ -2,21 +2,23 @@ import { FC } from 'react';
 
 import Navigation from './Navigation';
 import Trending from './Trending';
-import ComposeTweet from './ComposeTweet';
+import SignUp from './SignUp';
 import DarkOverlay from './DarkOverlay';
+import ComposeTweet from './ComposeTweet';
+import AuthModal from './AuthModal';
 import TweetComposeButton from './TweetComposeButton';
 import BottomNavigation from './BottomNavigation';
+import BottomAuth from './BottomAuth';
 
-import { useAppSelector } from '../hooks';
+import { useAppSelector } from '../utils/hooks';
 
 interface LayoutProps {
-  children: JSX.Element[];
+  children: JSX.Element;
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-  const isComposeTweetShown = useAppSelector(
-    state => state.ui.isComposeTweetShown
-  );
+  const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
+  const { isComposeTweetShown, authModal } = useAppSelector(state => state.ui);
 
   return (
     <div className='relative'>
@@ -26,7 +28,13 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         </div>
       )}
 
-      {isComposeTweetShown && <DarkOverlay />}
+      {authModal.isShown && (
+        <div className='absolute z-50 top-0 bottom-0 ph:top-10 ph:bottom-10 left-0 ph:left-[50%] ph:-translate-x-[50%]'>
+          <AuthModal modalType={authModal.type} />
+        </div>
+      )}
+
+      {(isComposeTweetShown || authModal.isShown) && <DarkOverlay />}
       <div className='max-w-[664px] md2:max-w-[90vw] xl:max-w-7xl m-auto flex h-screen'>
         <div className='hidden ph:block w-16 xl:w-[20%] border-r-[1px] border-gray-200'>
           <Navigation />
@@ -37,15 +45,21 @@ const Layout: FC<LayoutProps> = ({ children }) => {
               {children}
             </div>
           </div>
-          <Trending />
+          <div className='hidden md2:block w-full pl-6 lg:pl-3 pb-14 overflow-y-scroll'>
+            {isAuthenticated ? <Trending /> : <SignUp />}
+          </div>
         </div>
       </div>
 
-      <div className='ph:hidden absolute bottom-20 right-2 ph_sm:right-4 z-30'>
-        <TweetComposeButton from='App' />
-      </div>
+      {isAuthenticated && (
+        <div className='ph:hidden absolute bottom-20 right-2 ph_sm:right-4 z-30'>
+          <TweetComposeButton from='App' />
+        </div>
+      )}
 
-      <BottomNavigation />
+      {isAuthenticated && <BottomNavigation />}
+
+      {!isAuthenticated && <BottomAuth />}
     </div>
   );
 };

@@ -9,13 +9,16 @@ import { TbMessages } from 'react-icons/tb';
 import { RiFileListLine } from 'react-icons/ri';
 import { FaRegUser } from 'react-icons/fa';
 import { CgMoreO } from 'react-icons/cg';
-import { FiMoreHorizontal } from 'react-icons/fi';
+import { FiMoreHorizontal, FiSettings } from 'react-icons/fi';
 
 import TweetComposeButton from './TweetComposeButton';
 
 import constants from '../constants';
+import { useAppSelector } from '../utils/hooks';
 
 const Navigation = () => {
+  const { isAuthenticated } = useAppSelector(state => state.auth);
+
   return (
     <div className='mr-[15%]'>
       <div className='relative h-screen flex flex-col'>
@@ -28,83 +31,101 @@ const Navigation = () => {
         </div>
 
         <div className='flex flex-col items-center xl:items-start'>
+          {isAuthenticated && (
+            <Link
+              href='/'
+              className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+            >
+              <BiHomeCircle className='text-3xl' />
+              <span className='hidden xl:block text-xl font-bold'>Home</span>
+            </Link>
+          )}
           <Link
             href='/'
-            className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
-          >
-            <BiHomeCircle className='text-3xl' />
-            <span className='hidden xl:block text-xl font-bold'>Home</span>
-          </Link>
-          <Link
-            href='/'
-            className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+            className={`flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200 ${
+              !isAuthenticated && 'font-bold'
+            }`}
           >
             <HiOutlineHashtag className='hidden md2:block text-3xl' />
             <GrSearch className='md2:hidden text-3xl pl-[2px]' />
             <span className='hidden xl:block text-xl'>Explore</span>
           </Link>
-          <Link
-            href='/'
-            className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
-          >
-            <HiOutlineBell className='text-3xl' />
-            <span className='hidden xl:block text-xl'>Notifications</span>
-          </Link>
-          <Link
-            href='/'
-            className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
-          >
-            <TbMessages className='text-3xl' />
-            <span className='hidden xl:block text-xl'>Messages</span>
-          </Link>
-          <Link
-            href='/'
-            className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
-          >
-            <BiBookmark className='text-3xl' />
-            <span className='hidden xl:block text-xl'>Bookmarks</span>
-          </Link>
-          <Link
-            href='/'
-            className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
-          >
-            <RiFileListLine className='text-3xl' />
-            <span className='hidden xl:block text-xl'>Lists</span>
-          </Link>
-          <Link
-            href='/'
-            className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
-          >
-            <FaRegUser className='text-2xl' />
-            <span className='hidden xl:block text-xl'>Profile</span>
-          </Link>
-          <Link
-            href='/'
-            className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
-          >
-            <CgMoreO className='text-2xl' />
-            <span className='hidden xl:block text-xl'>More</span>
-          </Link>
-
-          <TweetComposeButton from='Navigation' />
+          {!isAuthenticated && (
+            <Link
+              href='/'
+              className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+            >
+              <FiSettings className='text-3xl md2:text-2xl' />
+              <span className='hidden xl:block text-xl'>Settings</span>
+            </Link>
+          )}
+          {isAuthenticated && (
+            <>
+              <Link
+                href='/'
+                className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+              >
+                <HiOutlineBell className='text-3xl' />
+                <span className='hidden xl:block text-xl'>Notifications</span>
+              </Link>
+              <Link
+                href='/'
+                className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+              >
+                <TbMessages className='text-3xl' />
+                <span className='hidden xl:block text-xl'>Messages</span>
+              </Link>
+              <Link
+                href='/'
+                className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+              >
+                <BiBookmark className='text-3xl' />
+                <span className='hidden xl:block text-xl'>Bookmarks</span>
+              </Link>
+              <Link
+                href='/'
+                className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+              >
+                <RiFileListLine className='text-3xl' />
+                <span className='hidden xl:block text-xl'>Lists</span>
+              </Link>
+              <Link
+                href='/'
+                className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+              >
+                <FaRegUser className='text-2xl' />
+                <span className='hidden xl:block text-xl'>Profile</span>
+              </Link>
+              <Link
+                href='/'
+                className='flex items-center xl:space-x-3 p-2 xl:pl-3 xl:pr-8 mb-3 rounded-full hover:bg-gray-200'
+              >
+                <CgMoreO className='text-2xl' />
+                <span className='hidden xl:block text-xl'>More</span>
+              </Link>
+              <TweetComposeButton from='Navigation' />
+            </>
+          )}
         </div>
 
-        <div className='absolute bottom-0 w-full hover:bg-gray-200 hover:cursor-pointer rounded-full flex items-center px-3 py-2'>
-          <div className='w-11 h-11'>
-            <Image
-              src={constants.placeholder_profilePicture}
-              alt='User'
-              width={44}
-              height={44}
-              className='rounded-full'
-            />
+        {isAuthenticated && (
+          <div className='absolute bottom-0 w-full hover:bg-gray-200 hover:cursor-pointer rounded-full flex items-center px-3 py-2'>
+            <div className='w-11 h-11'>
+              <Image
+                src={constants.placeholder_profilePicture}
+                alt='User'
+                width={44}
+                height={44}
+                className='rounded-full'
+              />
+            </div>
+            <div className='hidden xl:flex xl:flex-col xl:flex-1 xl:ml-3'>
+              <span className='font-bold'>Diganta Som</span>
+              <span className='text-gray-600 text-sm'>@ImDSom111</span>
+            </div>
+            <FiMoreHorizontal className='hidden xl:block' />
           </div>
-          <div className='hidden xl:flex xl:flex-col xl:flex-1 xl:ml-3'>
-            <span className='font-bold'>Diganta Som</span>
-            <span className='text-gray-600 text-sm'>@ImDSom111</span>
-          </div>
-          <FiMoreHorizontal className='hidden xl:block' />
-        </div>
+        )}
       </div>
     </div>
   );

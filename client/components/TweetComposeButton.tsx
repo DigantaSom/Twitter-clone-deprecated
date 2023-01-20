@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { FiFeather } from 'react-icons/fi';
 
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch } from '../utils/hooks';
 import { toggleComposeTweet } from '../redux/UI/ui.slice';
 
 interface TweetComposeButtonProps {

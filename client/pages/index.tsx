@@ -1,10 +1,22 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 
 import Layout from '../components/Layout';
-import Feed from '../components/Feed';
 import Header from '../components/Header';
+import Feed from '../components/Feed';
+import Explore from '../components/Explore';
+
+import { useAppDispatch, useAppSelector } from '../utils/hooks';
+import { getCurrentUser } from '../redux/auth/auth.slice';
 
 const Home = () => {
+  const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, []);
+
   return (
     <div>
       <Head>
@@ -14,8 +26,14 @@ const Home = () => {
       </Head>
 
       <Layout>
-        <Header />
-        <Feed />
+        {isAuthenticated ? (
+          <>
+            <Header />
+            <Feed />
+          </>
+        ) : (
+          <Explore />
+        )}
       </Layout>
     </div>
   );

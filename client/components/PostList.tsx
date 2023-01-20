@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import PostItem from './PostItem';
 
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../utils/hooks';
 import { fetchTweetSuccess } from '../redux/tweet/tweet.slice';
 
 const PostList = () => {

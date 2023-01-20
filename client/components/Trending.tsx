@@ -12,7 +12,7 @@ import { BsFillArrowUpRightSquareFill } from 'react-icons/bs';
 import ProfilePicture from './ProfilePicture';
 import TrendMorePopup from './TrendMorePopup';
 
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../utils/hooks';
 import {
   showWhatsHappening,
   showWhoToFollow,
@@ -57,7 +57,7 @@ const Trending = () => {
   };
 
   return (
-    <div className='hidden md2:block w-full pl-6 lg:pl-3 pb-14 overflow-y-scroll'>
+    <>
       {/* Search Bar */}
       <section className='h-12 flex items-center'>
         <div className='w-full flex items-center px-4 bg-gray-100 rounded-full'>
@@ -210,7 +210,7 @@ const Trending = () => {
         </div>
         <span>&copy; {new Date().getFullYear()} Twitter Clone, Inc.</span>
       </section>
-    </div>
+    </>
   );
 };
 

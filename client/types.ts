@@ -1,5 +1,22 @@
 import { StaticImageData } from 'next/image';
 
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  handle: string;
+  profilePicture: string;
+  birthday: string;
+  joiningDate: string;
+}
+
+export type AuthModalType =
+  | 'signup'
+  | 'login'
+  | 'signup-form'
+  | 'login-form'
+  | '';
+
 interface IUserID {
   userId: string;
 }
@@ -38,3 +55,17 @@ export interface IWhoToFollow {
   profilePicture: string;
   isPromoted: boolean;
 }
+
+export type MonthType =
+  | 'January'
+  | 'February'
+  | 'March'
+  | 'April'
+  | 'May'
+  | 'June'
+  | 'July'
+  | 'August'
+  | 'September'
+  | 'October'
+  | 'November'
+  | 'December';

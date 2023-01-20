@@ -1,14 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import uiReducer from './UI/ui.slice';
-import trendingSlice from './trending/trending.slice';
-import tweetSlice from './tweet/tweet.slice';
+import authReducer from './auth/auth.slice';
+import tweetReducer from './tweet/tweet.slice';
+import trendingReducer from './trending/trending.slice';
 
 const store = configureStore({
   reducer: {
     ui: uiReducer,
-    trending: trendingSlice,
-    tweet: tweetSlice,
+    auth: authReducer,
+    tweet: tweetReducer,
+    trending: trendingReducer,
   },
 });
 

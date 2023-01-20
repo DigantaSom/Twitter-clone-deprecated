@@ -12,7 +12,7 @@ import { CgPin } from 'react-icons/cg';
 import ProfilePicture from './ProfilePicture';
 import TweetSubmitButton from './TweetSubmitButton';
 
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch } from '../utils/hooks';
 import { handleSubmitDisabled } from '../redux/UI/ui.slice';
 
 import constants from '../constants';
