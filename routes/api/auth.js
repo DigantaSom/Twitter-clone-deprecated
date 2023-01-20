@@ -8,7 +8,20 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const router = express.Router();
+const auth = require('../../middlewares/auth');
 const User = require('../../models/User');
+
+// @route   GET api/auth
+// @desc    Hit this route everytime a component re-renders in the frontend, to make sure that the user is logged in (since JWT is stateless)
+// @access  Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route   POST api/auth
 // @desc    Login
