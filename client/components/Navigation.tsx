@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
 
 import { BsTwitter } from 'react-icons/bs';
 import { BiHomeCircle, BiBookmark } from 'react-icons/bi';
@@ -11,13 +12,14 @@ import { FaRegUser } from 'react-icons/fa';
 import { CgMoreO } from 'react-icons/cg';
 import { FiMoreHorizontal, FiSettings } from 'react-icons/fi';
 
+import { selectIsAuthenticated } from '../features/auth/auth.slice';
+
 import TweetComposeButton from './TweetComposeButton';
 
 import constants from '../constants';
-import { useAppSelector } from '../utils/hooks';
 
 const Navigation = () => {
-  const { isAuthenticated } = useAppSelector(state => state.auth);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   return (
     <div className='mr-[15%]'>

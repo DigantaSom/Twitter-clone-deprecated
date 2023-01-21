@@ -5,26 +5,27 @@ import Image from 'next/image';
 import { BsDot } from 'react-icons/bs';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
+import { useGetTweetsQuery } from '../features/tweet/tweet.api-slice';
+
 import ProfilePicture from './ProfilePicture';
 import TweetActions from './TweetActions';
 
-import { Tweet } from '../types';
-
 interface PostItemProps {
-  tweet: Tweet;
+  tweetId: string;
 }
 
-const PostItem: FC<PostItemProps> = ({
-  tweet: {
-    fullName,
-    twitterHandle,
-    profilePicture,
-    id: tweetId,
-    caption,
-    media,
-  },
-}) => {
+const PostItem: FC<PostItemProps> = ({ tweetId }) => {
   const router = useRouter();
+
+  const { tweet } = useGetTweetsQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      tweet: data?.entities[tweetId],
+    }),
+  });
+
+  if (!tweet) return null;
+
+  const { twitterHandle, profilePicture, fullName, caption, media } = tweet;
 
   const navigateToPost = () => {
     router.push(`/${twitterHandle}/status/${tweetId}`);
@@ -67,22 +68,24 @@ const PostItem: FC<PostItemProps> = ({
             {caption}
           </p>
 
-          <div
-            onClick={navigateToPostFullScreen}
-            className='custom-image-container relative pt-3 pb-2'
-          >
-            <Image
-              src={media[0]}
-              fill
-              sizes='100%'
-              priority={false}
-              placeholder='blur'
-              alt='Post'
-              className='custom-image rounded-xl'
-            />
-          </div>
+          {/* {media?.length && (
+            <div
+              onClick={navigateToPostFullScreen}
+              className='custom-image-container relative pt-3 pb-2'
+            >
+              <Image
+                src={media[0]}
+                fill
+                sizes='100%'
+                priority={false}
+                placeholder='blur'
+                alt='Post'
+                className='custom-image rounded-xl'
+              />
+            </div>
+          )} */}
 
-          <TweetActions />
+          <TweetActions tweet={tweet} />
         </div>
       </div>
     </div>

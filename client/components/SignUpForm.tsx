@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { IoCloseSharp, IoArrowBack } from 'react-icons/io5';
@@ -6,7 +6,7 @@ import { GrStatusGood } from 'react-icons/gr';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import { useAppDispatch, useGetDays, useGetYears } from '../utils/hooks';
-import { toggleAuthModal } from '../redux/UI/ui.slice';
+import { toggleAuthModal } from '../features/ui/ui.slice';
 
 import { MonthType } from '../types';
 import InputErrorMessage from './InputErrorMessage';

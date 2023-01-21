@@ -34,6 +34,9 @@ client/.vercel
 client/*.tsbuildinfo
 client/next-env.d.ts
 
+# others
+client/demo-data
+
 # Misc -----------------
 .DS_Store
 *.pem

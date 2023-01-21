@@ -1,34 +1,35 @@
-import { useEffect } from 'react';
+import { useGetTweetsQuery } from '../features/tweet/tweet.api-slice';
 
 import PostItem from './PostItem';
 
-import { useAppDispatch, useAppSelector } from '../utils/hooks';
-import { fetchTweetSuccess } from '../redux/tweet/tweet.slice';
-
 const PostList = () => {
-  const dispatch = useAppDispatch();
-  const { tweets, isLoading, error } = useAppSelector(state => state.tweet);
+  const {
+    data: tweets,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetTweetsQuery(undefined);
 
-  useEffect(() => {
-    dispatch(fetchTweetSuccess());
-  }, []);
+  let content;
 
   if (isLoading) {
-    return 'Loading...';
+    content = 'Loading...';
   }
 
-  return (
-    !isLoading &&
-    !error && (
-      <div>
-        {tweets.map(tweet => (
-          <PostItem key={tweet.id} tweet={tweet} />
-        ))}
-        <br />
-        <br />
-      </div>
-    )
-  );
+  if (isError) {
+    // TODO:
+    content = <p>Error loading Tweets</p>;
+  }
+
+  if (isSuccess) {
+    tweets?.ids.length &&
+      (content = tweets?.ids.map(tweetId => (
+        <PostItem key={tweetId} tweetId={tweetId} />
+      )));
+  }
+
+  return content;
 };
 
 export default PostList;

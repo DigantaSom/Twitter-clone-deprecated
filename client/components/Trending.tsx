@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from '../utils/hooks';
 import {
   showWhatsHappening,
   showWhoToFollow,
-} from '../redux/trending/trending.slice';
+} from '../features/trending/trending.slice';
 
 import constants from '../constants';
 

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { AuthModalType } from '../../types';
+import { AuthModalType } from './ui.types';
 
 interface UiState {
   isComposeTweetShown: boolean;

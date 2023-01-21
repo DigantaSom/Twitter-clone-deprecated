@@ -13,7 +13,7 @@ import ProfilePicture from './ProfilePicture';
 import TweetSubmitButton from './TweetSubmitButton';
 
 import { useAppDispatch } from '../utils/hooks';
-import { handleSubmitDisabled } from '../redux/UI/ui.slice';
+import { handleSubmitDisabled } from '../features/ui/ui.slice';
 
 import constants from '../constants';
 

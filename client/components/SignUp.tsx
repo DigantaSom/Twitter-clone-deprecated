@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
 import { useAppDispatch } from '../utils/hooks';
-import { toggleAuthModal } from '../redux/UI/ui.slice';
+import { toggleAuthModal } from '../features/ui/ui.slice';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();

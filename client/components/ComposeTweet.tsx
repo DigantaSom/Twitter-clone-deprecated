@@ -4,7 +4,7 @@ import CreateTweet from './CreateTweet';
 import TweetSubmitButton from './TweetSubmitButton';
 
 import { useAppDispatch, useAppSelector } from '../utils/hooks';
-import { toggleComposeTweet } from '../redux/UI/ui.slice';
+import { toggleComposeTweet } from '../features/ui/ui.slice';
 
 const ComposeTweet = () => {
   const isSubmitDisabled = useAppSelector(state => state.ui.isSubmitDisabled);

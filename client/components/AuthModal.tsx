@@ -1,27 +1,37 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { IoArrowBack, IoCloseSharp } from 'react-icons/io5';
 import { BsTwitter } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 
-import { AuthModalType } from '../types';
+import { AuthModalType } from '../features/ui/ui.types';
+import { useLoginMutation } from '../features/auth/auth-api.slice';
 
 import { useAppDispatch } from '../utils/hooks';
-import { toggleAuthModal } from '../redux/UI/ui.slice';
+import { toggleAuthModal } from '../features/ui/ui.slice';
 
 import SignUpForm from './SignUpForm';
 import InputErrorMessage from './InputErrorMessage';
+import { setCredentials } from '../features/auth/auth.slice';
 
 interface AuthModalProps {
   modalType: AuthModalType;
 }
 
 const AuthModal: FC<AuthModalProps> = ({ modalType }) => {
+  const dispatch = useAppDispatch();
   const [twitterHandle, setTwitterHandle] = useState('');
   const [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState('');
 
-  const dispatch = useAppDispatch();
+  const [login, { isLoading, isSuccess, isError }] = useLoginMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setErrMsg('');
+    }
+  }, [isSuccess]);
 
   const handleClickNext = () => {
     if (twitterHandle !== '') {
@@ -29,10 +39,29 @@ const AuthModal: FC<AuthModalProps> = ({ modalType }) => {
     }
   };
 
-  const handleClickLogin = () => {
+  const handleClickLogin = async () => {
     if (twitterHandle !== '' && password !== '') {
-      // TODO: login
-      dispatch(toggleAuthModal(''));
+      try {
+        const { token } = await login({
+          handle: twitterHandle,
+          password,
+        }).unwrap();
+        setTwitterHandle('');
+        setPassword('');
+        dispatch(setCredentials({ accessToken: token }));
+        dispatch(toggleAuthModal(''));
+      } catch (err: any) {
+        if (!err.status) {
+          setErrMsg('No Server Response');
+        } else if (err.status === 400) {
+          setErrMsg('Input fields must not be empty');
+        } else if (err.status === 401) {
+          setErrMsg('Unauthorized');
+        } else {
+          setErrMsg(err.data?.message);
+        }
+        alert(errMsg);
+      }
     }
   };
 

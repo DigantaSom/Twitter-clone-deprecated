@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../utils/hooks';
-import { toggleComposeTweet, toggleAuthModal } from '../redux/UI/ui.slice';
+import { toggleComposeTweet, toggleAuthModal } from '../features/ui/ui.slice';
 
 const DarkOverlay = () => {
   const { isComposeTweetShown, authModal } = useAppSelector(state => state.ui);
