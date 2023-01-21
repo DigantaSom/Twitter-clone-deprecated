@@ -5,8 +5,10 @@ const cookieParser = require('cookie-parser');
 
 const connectDB = require('./config/db');
 const corsOptions = require('./config/corsOptions');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
+const PORT = process.env.PORT || 5001;
 
 connectDB();
 
@@ -20,7 +22,7 @@ app.use('/api/tweets', require('./routes/tweet.routes'));
 app.use('/api/tweets/replies', require('./routes/reply.routes'));
 app.use('/api/inner-replies', require('./routes/inner-reply.routes'));
 
-const PORT = process.env.PORT || 5001;
+app.use(errorHandler);
 
 app.listen(PORT, () =>
   console.log(`Server started at http://localhost:${PORT}`)
