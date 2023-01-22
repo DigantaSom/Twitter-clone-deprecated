@@ -8,6 +8,8 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { ...userData },
       }),
+      // forcing to invalidate the User list in the cache
+      invalidatesTags: [{ type: 'User', id: 'LIST' }],
     }),
   }),
   overrideExisting: true,

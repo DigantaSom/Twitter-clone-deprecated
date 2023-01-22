@@ -42,8 +42,6 @@ const SignUpForm = () => {
 
   const [signUp, { isLoading }] = useSignUpMutation();
 
-  if (isLoading) return <PulseLoader color='#fff' />;
-
   const handleIncreaseStep = () => {
     setStep(prevState => prevState + 1);
   };
@@ -158,6 +156,8 @@ const SignUpForm = () => {
       alert(errMsg);
     }
   };
+
+  if (isLoading) return <PulseLoader color='#fff' />;
 
   return (
     <div className='h-full'>
