@@ -4,7 +4,7 @@ const User = require('../models/User');
 // @route GET api/tweets
 // desc Get all tweets (testing only)
 // @access Public
-const getAllUsers = async (_, res) => {
+const getAllTweets = async (_, res) => {
   try {
     const tweets = await Tweet.find().lean().exec();
     if (!tweets?.length) {
@@ -143,7 +143,7 @@ const likeTweet = async (req, res) => {
 };
 
 module.exports = {
-  getAllUsers,
+  getAllTweets,
   getTweetById,
   getTweetsByUserId,
   createTweet,

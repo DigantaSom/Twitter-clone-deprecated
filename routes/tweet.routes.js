@@ -7,7 +7,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(tweetController.getAllUsers)
+  .get(tweetController.getAllTweets)
   .post(verifyJWT, tweetController.createTweet);
 
 router
