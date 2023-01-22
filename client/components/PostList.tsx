@@ -14,7 +14,8 @@ const PostList = (): JSX.Element => {
   } = useGetTweetsQuery(undefined, {
     pollingInterval: 15000, // every 15s on this page, it will requery the data
     refetchOnFocus: true, // refetch on putting focus back to browser window
-    refetchOnMountOrArgChange: true, // refetch on component mound
+    refetchOnMountOrArgChange: true, // refetch on component mount
+    refetchOnReconnect: true,
   });
 
   let content;

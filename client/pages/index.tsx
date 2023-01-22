@@ -1,9 +1,7 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import { useSelector } from 'react-redux';
 
 import usePersist from '../hooks/usePersist';
-import { selectIsAuthenticated } from '../features/auth/auth.slice';
 
 import PersistLogin from '../features/auth/PersistLogin';
 import Layout from '../components/Layout';
@@ -12,7 +10,6 @@ import Feed from '../components/Feed';
 import Explore from '../components/Explore';
 
 const Home = () => {
-  const isAuthenticated = useSelector(selectIsAuthenticated);
   const persist = usePersist();
 
   return (
@@ -24,7 +21,7 @@ const Home = () => {
       </Head>
 
       <Layout>
-        {(persist && isAuthenticated) || (persist && !isAuthenticated) ? (
+        {persist ? (
           <PersistLogin>
             <>
               <Header />

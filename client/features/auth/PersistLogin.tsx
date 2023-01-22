@@ -38,15 +38,21 @@ const PersistLogin: FC<PersistLoginProps> = ({ children }) => {
 
   let content;
 
-  if (isLoading) {
-    // persist: yes, isAuthenticated: false
+  if (!persist) {
+    // persist: false
+    content = <Explore />;
+  } else if (isLoading) {
+    // persist: true, isAuthenticated: false
     content = <PulseLoader color='#fff' />;
   } else if (isError) {
-    // persist: yes, isAuthenticated: false
+    // persist: true, isAuthenticated: false
     console.log(error);
     content = <Explore />;
   } else if (isSuccess && trueSuccess) {
-    // persist: yes, isAuthenticated: true
+    // persist: true, isAuthenticated: true
+    content = children;
+  } else {
+    // On first login/signup (no refresh)
     content = children;
   }
 
