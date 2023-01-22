@@ -15,10 +15,12 @@ const authSlice = createSlice({
     setCredentials: (state, action: PayloadAction<SetCredenitalsPayload>) => {
       state.token = action.payload.accessToken;
       state.isAuthenticated = true;
+      localStorage.setItem('persist', JSON.stringify(true));
     },
     logout: state => {
       state.token = null;
       state.isAuthenticated = false;
+      localStorage.removeItem('persist');
     },
   },
 });

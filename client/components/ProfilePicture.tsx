@@ -6,13 +6,23 @@ import constants from '../constants';
 
 interface ProfilePictureProps {
   uri: string;
+  disableGoToProfile?: boolean;
 }
 
-const ProfilePicture: FC<ProfilePictureProps> = ({ uri }) => {
+const ProfilePicture: FC<ProfilePictureProps> = ({
+  uri,
+  disableGoToProfile,
+}) => {
   const router = useRouter();
 
+  const handleGotToProfile = () => {
+    if (!disableGoToProfile) {
+      router.push('/profile');
+    }
+  };
+
   return (
-    <div onClick={() => router.push('/profile')}>
+    <div onClick={handleGotToProfile}>
       <div className='relative w-10 h-10 ph_sm:w-12 ph_sm:h-12 hover:cursor-pointer'>
         <Image
           src={uri ? uri : constants.placeholder_profilePicture}

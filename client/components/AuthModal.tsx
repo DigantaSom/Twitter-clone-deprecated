@@ -1,19 +1,19 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import Link from 'next/link';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 import { IoArrowBack, IoCloseSharp } from 'react-icons/io5';
 import { BsTwitter } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 
 import { AuthModalType } from '../features/ui/ui.types';
-import { useLoginMutation } from '../features/auth/auth-api.slice';
-
 import { useAppDispatch } from '../utils/hooks';
+import { useLoginMutation } from '../features/auth/auth-api.slice';
 import { toggleAuthModal } from '../features/ui/ui.slice';
+import { setCredentials } from '../features/auth/auth.slice';
 
 import SignUpForm from './SignUpForm';
 import InputErrorMessage from './InputErrorMessage';
-import { setCredentials } from '../features/auth/auth.slice';
 
 interface AuthModalProps {
   modalType: AuthModalType;
@@ -23,15 +23,10 @@ const AuthModal: FC<AuthModalProps> = ({ modalType }) => {
   const dispatch = useAppDispatch();
   const [twitterHandle, setTwitterHandle] = useState('');
   const [password, setPassword] = useState('');
-  const [errMsg, setErrMsg] = useState('');
 
-  const [login, { isLoading, isSuccess, isError }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
-  useEffect(() => {
-    if (isSuccess) {
-      setErrMsg('');
-    }
-  }, [isSuccess]);
+  if (isLoading) return <PulseLoader color='#fff' />;
 
   const handleClickNext = () => {
     if (twitterHandle !== '') {
@@ -42,23 +37,22 @@ const AuthModal: FC<AuthModalProps> = ({ modalType }) => {
   const handleClickLogin = async () => {
     if (twitterHandle !== '' && password !== '') {
       try {
-        const { token } = await login({
+        const { accessToken } = await login({
           handle: twitterHandle,
           password,
         }).unwrap();
         setTwitterHandle('');
         setPassword('');
-        dispatch(setCredentials({ accessToken: token }));
+        dispatch(setCredentials({ accessToken }));
         dispatch(toggleAuthModal(''));
       } catch (err: any) {
+        console.log(err);
+        let errMsg = '';
+
         if (!err.status) {
-          setErrMsg('No Server Response');
-        } else if (err.status === 400) {
-          setErrMsg('Input fields must not be empty');
-        } else if (err.status === 401) {
-          setErrMsg('Unauthorized');
+          errMsg = 'No Server Response';
         } else {
-          setErrMsg(err.data?.message);
+          errMsg = err.data?.message;
         }
         alert(errMsg);
       }

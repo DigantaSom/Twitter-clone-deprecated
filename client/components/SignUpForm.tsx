@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 import { IoCloseSharp, IoArrowBack } from 'react-icons/io5';
 import { GrStatusGood } from 'react-icons/gr';
@@ -7,8 +8,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import { useAppDispatch, useGetDays, useGetYears } from '../utils/hooks';
 import { toggleAuthModal } from '../features/ui/ui.slice';
+import { useSignUpMutation } from '../features/user/user-api.slice';
+import { setCredentials } from '../features/auth/auth.slice';
 
 import { MonthType } from '../types';
+
 import InputErrorMessage from './InputErrorMessage';
 
 const SignUpForm = () => {
@@ -34,6 +38,10 @@ const SignUpForm = () => {
 
   const yearsList = useGetYears();
   const daysList = useGetDays(selectedMonth as MonthType, +selectedYear);
+
+  const [signUp, { isLoading }] = useSignUpMutation();
+
+  if (isLoading) return <PulseLoader color='#fff' />;
 
   const handleIncreaseStep = () => {
     setStep(prevState => prevState + 1);
@@ -114,17 +122,40 @@ const SignUpForm = () => {
   }, [username]);
 
   useEffect(() => {
-    if (password.length < 8) {
+    if (password.length < 5) {
       setIsPasswordError(true);
     } else {
       setIsPasswordError(false);
     }
   }, [password]);
 
-  const handleSignUp = () => {
-    dispatch(toggleAuthModal(''));
-    // TODO:
-    console.log('You are signed up!');
+  const handleSignUp = async () => {
+    try {
+      const res = await signUp({
+        name: fullName,
+        email,
+        password,
+        handle: username,
+      }).unwrap();
+      setFullName('');
+      setUsername('');
+      setSelectedDay('');
+      setSelectedMonth('');
+      setSelectedYear('');
+      setPassword('');
+      dispatch(setCredentials({ accessToken: res.accessToken }));
+      dispatch(toggleAuthModal(''));
+    } catch (err: any) {
+      console.log(err);
+      let errMsg = '';
+
+      if (!err.status) {
+        errMsg = 'No Server Response';
+      } else {
+        errMsg = err.data?.message;
+      }
+      alert(errMsg);
+    }
   };
 
   return (
@@ -438,7 +469,7 @@ const SignUpForm = () => {
               </div>
             </div>
             {isPasswordError && (
-              <InputErrorMessage message='Password must be 8 or more characters' />
+              <InputErrorMessage message='Password must be 5 or more characters' />
             )}
           </>
         )}

@@ -23,7 +23,7 @@ const getAllUsers = async (req, res) => {
 const createUser = async (req, res) => {
   const { name, handle, password, profilePicture } = req.body;
 
-  if (!name || !email || !password || !handle) {
+  if (!name || !req.body.email || !password || !handle) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
@@ -33,14 +33,14 @@ const createUser = async (req, res) => {
       .json({ message: 'Password must be at least 5 characters long' });
   }
 
-  email = req.body.email.toLowerCase();
+  const email = req.body.email.toLowerCase();
 
   try {
     let user = await User.findOne({ email });
 
     if (user) {
       return res.status(409).json({
-        errors: [{ message: 'User already exists' }],
+        message: 'User already exists',
       });
     }
 
@@ -59,6 +59,9 @@ const createUser = async (req, res) => {
     const payload = {
       user: {
         id: user.id,
+        twitterHandle: user.handle,
+        fullName: user.name,
+        profilePicture: user.profilePicture,
       },
     };
 
@@ -66,9 +69,17 @@ const createUser = async (req, res) => {
       expiresIn: '15m',
     });
 
-    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: '7d',
-    });
+    const refreshToken = jwt.sign(
+      {
+        user: {
+          id: user.id,
+        },
+      },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: '7d',
+      }
+    );
 
     // Creates secure cookie with refresh token
     res.cookie('jwt', refreshToken, {

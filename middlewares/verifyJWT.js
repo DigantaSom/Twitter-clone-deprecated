@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
 
   if (!authHeader?.startsWith('Bearer ')) {
     return res.status(401).json({
-      message: 'No token, authorization denied.',
+      message: 'No token, authorization denied',
     });
   }
   const token = authHeader.split(' ')[1].trim();
@@ -15,13 +15,13 @@ module.exports = (req, res, next) => {
   try {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {
       if (error) {
-        return res.status(403).json({ message: 'Invalid token.' });
+        return res.status(403).json({ message: 'Invalid token' });
       } else {
         req.user = decoded.user;
         next();
       }
     });
   } catch (err) {
-    res.status(403).json({ message: 'Invalid token.' });
+    res.status(500).json({ message: 'Server Error' });
   }
 };

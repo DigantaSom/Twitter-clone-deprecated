@@ -22,22 +22,23 @@ const login = async (req, res) => {
     let user = await User.findOne({ handle_lowercase: handle.toLowerCase() });
 
     if (!user) {
-      return res.status(401).json({
-        errors: [{ message: 'Inavlid credentials' }],
-      });
+      return res.status(401).json({ message: 'Inavlid credentials' });
     }
 
     const isMatch = await argon2.verify(user.password, password);
 
     if (!isMatch) {
       return res.status(401).json({
-        errors: [{ message: 'Invalid credentials' }],
+        message: 'Invalid credentials',
       });
     }
 
     const payload = {
       user: {
         id: user.id,
+        twitterHandle: user.handle,
+        fullName: user.name,
+        profilePicture: user.profilePicture,
       },
     };
 
@@ -45,9 +46,17 @@ const login = async (req, res) => {
       expiresIn: '15m',
     });
 
-    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: '7d',
-    });
+    const refreshToken = jwt.sign(
+      {
+        user: {
+          id: user.id,
+        },
+      },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: '7d',
+      }
+    );
 
     // Creates secure cookie with refresh token
     res.cookie('jwt', refreshToken, {
@@ -94,6 +103,9 @@ const refresh = (req, res) => {
         {
           user: {
             id: foundUser.id,
+            twitterHandle: foundUser.handle,
+            fullName: foundUser.name,
+            profilePicture: foundUser.profilePicture,
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
