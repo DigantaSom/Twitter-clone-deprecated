@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
-import { useAppDispatch } from '../hooks/redux-hooks';
-import { toggleAuthModal } from '../features/ui/ui.slice';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { toggleAuthModal } from '../ui/ui.slice';
 
 const SignUp = () => {
   const dispatch = useAppDispatch();

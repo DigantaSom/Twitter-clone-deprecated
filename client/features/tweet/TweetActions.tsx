@@ -3,7 +3,7 @@ import { AiOutlineRetweet, AiOutlineHeart } from 'react-icons/ai';
 import { MdIosShare } from 'react-icons/md';
 import { TbMessageCircle2 } from 'react-icons/tb';
 
-import { Tweet } from '../types';
+import { Tweet } from '../../types';
 
 interface TweetActionsProps {
   tweet: Tweet;

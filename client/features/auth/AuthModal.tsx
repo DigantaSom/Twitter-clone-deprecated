@@ -6,14 +6,14 @@ import { IoArrowBack, IoCloseSharp } from 'react-icons/io5';
 import { BsTwitter } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 
-import { AuthModalType } from '../features/ui/ui.types';
-import { useAppDispatch } from '../hooks/redux-hooks';
-import { useLoginMutation } from '../features/auth/auth-api.slice';
-import { toggleAuthModal } from '../features/ui/ui.slice';
-import { setCredentials } from '../features/auth/auth.slice';
+import { AuthModalType } from '../ui/ui.types';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { useLoginMutation } from './auth-api.slice';
+import { toggleAuthModal } from '../ui/ui.slice';
+import { setCredentials } from './auth.slice';
 
 import SignUpForm from './SignUpForm';
-import InputErrorMessage from './InputErrorMessage';
+import InputErrorMessage from '../../components/InputErrorMessage';
 
 interface AuthModalProps {
   modalType: AuthModalType;

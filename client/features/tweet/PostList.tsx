@@ -1,6 +1,6 @@
 import PulseLoader from 'react-spinners/PulseLoader';
 
-import { useGetTweetsQuery } from '../features/tweet/tweet.api-slice';
+import { useGetTweetsQuery } from './tweet.api-slice';
 
 import PostItem from './PostItem';
 

@@ -1,5 +1,5 @@
-import { useAppDispatch } from '../hooks/redux-hooks';
-import { toggleAuthModal } from '../features/ui/ui.slice';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { toggleAuthModal } from '../ui/ui.slice';
 
 const BottomAuth = () => {
   const dispatch = useAppDispatch();

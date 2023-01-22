@@ -9,18 +9,18 @@ import { BsDot } from 'react-icons/bs';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { BsFillArrowUpRightSquareFill } from 'react-icons/bs';
 
-import ProfilePicture from './ProfilePicture';
+import ProfilePicture from '../../components/ProfilePicture';
 import TrendMorePopup from './TrendMorePopup';
 
-import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import {
   selectWhatsHappening,
   selectWhoToFollow,
   showWhatsHappening,
   showWhoToFollow,
-} from '../features/trending/trending.slice';
+} from './trending.slice';
 
-import constants from '../constants';
+import constants from '../../constants';
 
 const Trending = () => {
   const dispatch = useAppDispatch();

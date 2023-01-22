@@ -9,13 +9,13 @@ import { BiPoll } from 'react-icons/bi';
 import { GrEmoji } from 'react-icons/gr';
 import { CgPin } from 'react-icons/cg';
 
-import ProfilePicture from './ProfilePicture';
+import ProfilePicture from '../../components/ProfilePicture';
 import TweetSubmitButton from './TweetSubmitButton';
 
-import { useAppDispatch } from '../hooks/redux-hooks';
-import { handleSubmitDisabled } from '../features/ui/ui.slice';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { handleSubmitDisabled } from '../ui/ui.slice';
 
-import constants from '../constants';
+import constants from '../../constants';
 
 interface CreateTweetProps {
   from: 'Feed' | 'ComposeTweet';

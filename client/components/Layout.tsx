@@ -1,14 +1,14 @@
 import { FC } from 'react';
 
 import Navigation from './Navigation';
-import Trending from './Trending';
-import SignUp from './SignUp';
+import Trending from '../features/trending/Trending';
+import SignUp from '../features/auth/SignUp';
 import DarkOverlay from './DarkOverlay';
-import ComposeTweet from './ComposeTweet';
-import AuthModal from './AuthModal';
+import ComposeTweet from '../features/tweet/ComposeTweet';
+import AuthModal from '../features/auth/AuthModal';
 import TweetComposeButton from './TweetComposeButton';
 import BottomNavigation from './BottomNavigation';
-import BottomAuth from './BottomAuth';
+import BottomAuth from '../features/auth/BottomAuth';
 
 import { useAppSelector } from '../hooks/redux-hooks';
 import { selectIsAuthenticated } from '../features/auth/auth.slice';

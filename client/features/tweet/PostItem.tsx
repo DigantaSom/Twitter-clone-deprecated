@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { BsDot } from 'react-icons/bs';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
-import { useGetTweetsQuery } from '../features/tweet/tweet.api-slice';
+import { useGetTweetsQuery } from './tweet.api-slice';
 
-import ProfilePicture from './ProfilePicture';
+import ProfilePicture from '../../components/ProfilePicture';
 import TweetActions from './TweetActions';
 
 interface PostItemProps {

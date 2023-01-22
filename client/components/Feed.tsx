@@ -1,5 +1,5 @@
-import CreateTweet from './CreateTweet';
-import PostList from './PostList';
+import CreateTweet from '../features/tweet/CreateTweet';
+import PostList from '../features/tweet/PostList';
 
 const Feed = () => {
   return (
