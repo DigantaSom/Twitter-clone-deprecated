@@ -1,8 +1,14 @@
-import { useAppDispatch, useAppSelector } from '../utils/hooks';
-import { toggleComposeTweet, toggleAuthModal } from '../features/ui/ui.slice';
+import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
+import {
+  selectIsComposeTweetShown,
+  selectAuthModal,
+  toggleComposeTweet,
+  toggleAuthModal,
+} from '../features/ui/ui.slice';
 
 const DarkOverlay = () => {
-  const { isComposeTweetShown, authModal } = useAppSelector(state => state.ui);
+  const isComposeTweetShown = useAppSelector(selectIsComposeTweetShown);
+  const authModal = useAppSelector(selectAuthModal);
   const dispatch = useAppDispatch();
 
   const handleCloseModal = () => {

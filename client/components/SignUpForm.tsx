@@ -6,7 +6,8 @@ import { IoCloseSharp, IoArrowBack } from 'react-icons/io5';
 import { GrStatusGood } from 'react-icons/gr';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
-import { useAppDispatch, useGetDays, useGetYears } from '../utils/hooks';
+import { useAppDispatch } from '../hooks/redux-hooks';
+import { useGetDays, useGetYears } from '../hooks/date-hooks';
 import { toggleAuthModal } from '../features/ui/ui.slice';
 import { useSignUpMutation } from '../features/user/user-api.slice';
 import { setCredentials } from '../features/auth/auth.slice';

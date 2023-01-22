@@ -3,11 +3,14 @@ import { IoArrowBack, IoCloseSharp } from 'react-icons/io5';
 import CreateTweet from './CreateTweet';
 import TweetSubmitButton from './TweetSubmitButton';
 
-import { useAppDispatch, useAppSelector } from '../utils/hooks';
-import { toggleComposeTweet } from '../features/ui/ui.slice';
+import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
+import {
+  selectIsSubmitDisabled,
+  toggleComposeTweet,
+} from '../features/ui/ui.slice';
 
 const ComposeTweet = () => {
-  const isSubmitDisabled = useAppSelector(state => state.ui.isSubmitDisabled);
+  const isSubmitDisabled = useAppSelector(selectIsSubmitDisabled);
   const dispatch = useAppDispatch();
 
   return (

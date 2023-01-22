@@ -12,8 +12,10 @@ import { BsFillArrowUpRightSquareFill } from 'react-icons/bs';
 import ProfilePicture from './ProfilePicture';
 import TrendMorePopup from './TrendMorePopup';
 
-import { useAppDispatch, useAppSelector } from '../utils/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
 import {
+  selectWhatsHappening,
+  selectWhoToFollow,
   showWhatsHappening,
   showWhoToFollow,
 } from '../features/trending/trending.slice';
@@ -22,8 +24,8 @@ import constants from '../constants';
 
 const Trending = () => {
   const dispatch = useAppDispatch();
-  const whatsHappening = useAppSelector(state => state.trending.whatsHappening);
-  const whoToFollow = useAppSelector(state => state.trending.whoToFollow);
+  const whatsHappening = useAppSelector(selectWhatsHappening);
+  const whoToFollow = useAppSelector(selectWhoToFollow);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [showPopup, setShowPopup] = useState(false);

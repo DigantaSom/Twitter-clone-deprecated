@@ -17,3 +17,8 @@ export interface IWhoToFollow {
   profilePicture: string;
   isPromoted: boolean;
 }
+
+export interface TrendingState {
+  whatsHappening: IWhatsHappening[];
+  whoToFollow: IWhoToFollow[];
+}

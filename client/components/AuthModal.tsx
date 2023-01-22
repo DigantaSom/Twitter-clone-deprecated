@@ -7,7 +7,7 @@ import { BsTwitter } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 
 import { AuthModalType } from '../features/ui/ui.types';
-import { useAppDispatch } from '../utils/hooks';
+import { useAppDispatch } from '../hooks/redux-hooks';
 import { useLoginMutation } from '../features/auth/auth-api.slice';
 import { toggleAuthModal } from '../features/ui/ui.slice';
 import { setCredentials } from '../features/auth/auth.slice';

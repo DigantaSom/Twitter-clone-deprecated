@@ -1,14 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IWhatsHappening, IWhoToFollow } from './trending.types';
+import { RootState } from '../../app/store';
+import { TrendingState } from './trending.types';
 
 import whatsHappening from '../../demo-data/trending/whats-happening';
 import whoToFollow from '../../demo-data/trending/whoToFollow';
-
-interface TrendingState {
-  whatsHappening: IWhatsHappening[];
-  whoToFollow: IWhoToFollow[];
-}
 
 const initialState: TrendingState = {
   whatsHappening: [],
@@ -27,6 +23,11 @@ const trendingSlice = createSlice({
     },
   },
 });
+
+export const selectWhatsHappening = (state: RootState) =>
+  state.trending.whatsHappening;
+export const selectWhoToFollow = (state: RootState) =>
+  state.trending.whoToFollow;
 
 export const { showWhatsHappening, showWhoToFollow } = trendingSlice.actions;
 

@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import PulseLoader from 'react-spinners/PulseLoader';
 
+import { useAppSelector } from '../../hooks/redux-hooks';
 import usePersist from '../../hooks/usePersist';
 import { useRefreshMutation } from './auth-api.slice';
 import { selectIsAuthenticated } from './auth.slice';
@@ -13,7 +13,7 @@ interface PersistLoginProps {
 }
 
 const PersistLogin: FC<PersistLoginProps> = ({ children }) => {
-  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   // trueSuccess is used to give enough time to set the credentials (auth.slice.js' setCredenitals action creator)
   const [trueSuccess, setTrueSuccess] = useState(false);
   const persist = usePersist();

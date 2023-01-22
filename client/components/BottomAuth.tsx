@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../utils/hooks';
+import { useAppDispatch } from '../hooks/redux-hooks';
 import { toggleAuthModal } from '../features/ui/ui.slice';
 
 const BottomAuth = () => {

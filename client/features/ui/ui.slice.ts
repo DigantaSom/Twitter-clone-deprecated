@@ -1,16 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { AuthModalType } from './ui.types';
-
-interface UiState {
-  isComposeTweetShown: boolean;
-  authModal: {
-    isShown: boolean;
-    type: AuthModalType;
-  };
-  isSubmitDisabled: boolean;
-}
+import { UiState, AuthModalType } from './ui.types';
+import { RootState } from '../../app/store';
 
 const initialState: UiState = {
   isComposeTweetShown: false,
@@ -37,6 +29,12 @@ const uiSlice = createSlice({
     },
   },
 });
+
+export const selectIsComposeTweetShown = (state: RootState) =>
+  state.ui.isComposeTweetShown;
+export const selectAuthModal = (state: RootState) => state.ui.authModal;
+export const selectIsSubmitDisabled = (state: RootState) =>
+  state.ui.isSubmitDisabled;
 
 export const { toggleComposeTweet, toggleAuthModal, handleSubmitDisabled } =
   uiSlice.actions;

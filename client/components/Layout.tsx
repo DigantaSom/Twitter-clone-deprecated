@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import Navigation from './Navigation';
 import Trending from './Trending';
@@ -11,16 +10,21 @@ import TweetComposeButton from './TweetComposeButton';
 import BottomNavigation from './BottomNavigation';
 import BottomAuth from './BottomAuth';
 
-import { useAppSelector } from '../utils/hooks';
+import { useAppSelector } from '../hooks/redux-hooks';
 import { selectIsAuthenticated } from '../features/auth/auth.slice';
+import {
+  selectIsComposeTweetShown,
+  selectAuthModal,
+} from '../features/ui/ui.slice';
 
 interface LayoutProps {
   children: JSX.Element;
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-  const isAuthenticated = useSelector(selectIsAuthenticated);
-  const { isComposeTweetShown, authModal } = useAppSelector(state => state.ui);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isComposeTweetShown = useAppSelector(selectIsComposeTweetShown);
+  const authModal = useAppSelector(selectAuthModal);
 
   return (
     <div className='relative'>

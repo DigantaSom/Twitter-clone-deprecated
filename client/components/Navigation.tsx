@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 import { BsTwitter } from 'react-icons/bs';
@@ -13,6 +12,7 @@ import { CgMoreO } from 'react-icons/cg';
 import { FiMoreHorizontal, FiSettings } from 'react-icons/fi';
 
 import { TokenPayloadUser } from '../types';
+import { useAppSelector } from '../hooks/redux-hooks';
 import useAuth from '../hooks/useAuth';
 import { selectIsAuthenticated } from '../features/auth/auth.slice';
 import { useSendLogoutMutation } from '../features/auth/auth-api.slice';
@@ -21,7 +21,7 @@ import TweetComposeButton from './TweetComposeButton';
 import ProfilePicture from './ProfilePicture';
 
 const Navigation = () => {
-  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const auth = useAuth();
   const [sendLogout, { isLoading, isError, error }] = useSendLogoutMutation();
 

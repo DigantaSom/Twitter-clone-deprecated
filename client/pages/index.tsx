@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
-import usePersist from '../hooks/usePersist';
-
 import PersistLogin from '../features/auth/PersistLogin';
 import Layout from '../components/Layout';
 import Header from '../components/Header';
@@ -10,7 +8,11 @@ import Feed from '../components/Feed';
 import Explore from '../components/Explore';
 
 const Home = () => {
-  const persist = usePersist();
+  let persist = false;
+
+  if (typeof window !== 'undefined') {
+    persist = !!localStorage.getItem('persist');
+  }
 
   return (
     <div>
